@@ -186,8 +186,8 @@ contract WalletImplementation is IWallet, IFlashLoanReceiver {
     address initiator,
     bytes calldata params
   ) external override returns (bool) {
-    initiator;
     params;
+    require(initiator == address(this), "Wallet::executeOperation: FORBIDDEN");
     require(msg.sender == address(POOL), "Wallet::executeOperation: FORBIDDEN");
     _execute(_to, _data, _value);
     _to = new address[](0);
